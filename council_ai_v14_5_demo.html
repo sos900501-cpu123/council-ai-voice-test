@@ -1,4 +1,5 @@
-<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V14.6 가상 질문 시험</title><style>body{background:#0b1729;color:#eef5ff;font:16px system-ui;margin:20px}main{max-width:650px;margin:auto}section{background:#203954;padding:16px;border-radius:12px;margin:14px 0}input,button{box-sizing:border-box;width:100%;padding:14px;margin:8px 0;font:inherit;border-radius:8px}button{background:#176c54;color:white;border:0}button:disabled{opacity:.5}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}</style><main><h2>V14.6 자동답변 시험</h2><section>가상의 A시가 도시공원을 조성할 때 검토해야 할 사항은 무엇입니까?</section><p>실제 업무자료 및 음성은 전송하지 않습니다. 서버에서 허용한 가상 질문 한 건만 실행할 수 있습니다.</p><label>보좌관 접속 인증키 (AUTH_TOKEN)<input id="token" type="password" autocomplete="off"></label><label><input id="consent" type="checkbox" style="width:auto"> 가상 질문 1회 시험 실행 확인</label><button id="run">가상 질문 자동답변 시험</button><section><strong>답변 및 상태</strong><pre id="out" role="status">대기 중</pre></section><a style="color:#9dcaff" href="council_ai_v14_parallel.html">기존 보좌관으로 돌아가기</a></main><script>
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V14.6 가상 질문 시험</title><style>body{background:#0b1729;color:#eef5ff;font:16px system-ui;margin:20px}main{max-width:650px;margin:auto}section{background:#203954;padding:16px;border-radius:12px;margin:14px 0}input,button{box-sizing:border-box;width:100%;padding:14px;margin:8px 0;font:inherit;border-radius:8px}button{background:#176c54;color:white;border:0}button:disabled{opacity:.5}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}</style><main><h2>V14.6 자동답변 시험</h2><section>가상의 A시가 도시공원을 조성할 때 검토해야 할 사항은 무엇입니까?</section><fieldset id="trialControls" hidden disabled><label>보좌관 접속 인증키 (AUTH_TOKEN)<input id="token" type="password" autocomplete="off"></label><label><input id="consent" type="checkbox" style="width:auto"> 가상 질문 1회 시험 실행 확인</label><button id="run">가상 질문 자동답변 시험</button></fieldset><section><strong>답변 및 상태</strong><pre id="out" role="status">1회 시험 완료 · 실제 GPT 답변을 수신했습니다.
+마지막 항목은 문장이 끝나기 전에 끊겼습니다.</pre></section><a style="color:#9dcaff" href="council_ai_v14_parallel.html">기존 보좌관으로 돌아가기</a></main><script>
 const token = document.getElementById('token');
 const run = document.getElementById('run');
 const out = document.getElementById('out');
@@ -25,6 +26,7 @@ function showAnswer(data) {
 }
 
 run.onclick = async () => {
+  if (document.getElementById('trialControls').disabled) return;
   if (!document.getElementById('consent').checked || !token.value) {
     out.textContent = '인증키와 실행 확인이 필요합니다.';
     return;
