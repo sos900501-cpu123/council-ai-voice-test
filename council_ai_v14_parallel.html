@@ -1,0 +1,259 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1729"><title>의회 AI V14 병행 운영</title><style>
+*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:system-ui,'Noto Sans KR',sans-serif;background:#0b1729;color:#eef5ff}button,input,textarea{font:inherit}button{border:0;border-radius:12px;color:white;background:#315782;font-weight:700;padding:10px;cursor:pointer}button:disabled{opacity:.4}.app{height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 10px env(safe-area-inset-bottom);gap:8px;overflow:hidden}.top{height:47px;flex:none;display:flex;align-items:center;justify-content:space-between}.top b{font-size:17px}.top small{font-size:11px;color:#9db7d6}.pill{font-size:11px;background:#203954;padding:6px 9px;border-radius:18px;min-width:58px;text-align:center}.pill.listening{background:#176c54;color:#fff;animation:listenPulse 1s step-end infinite}@keyframes listenPulse{0%,49%{opacity:1}50%,100%{opacity:.28}}@media(prefers-reduced-motion:reduce){.pill.listening{animation:none;outline:2px solid #66e0b4}}.controls{flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.controls button{min-height:39px;font-size:12px;padding:6px 3px;border-radius:9px}.start{background:#127358}.stop{background:#a4384a}.follow{background:#315f9e}.panel{min-height:0;display:flex;flex-direction:column;border-radius:15px;padding:11px;border:1px solid #2b4562;background:#172a43}.question{flex:1;max-height:50%;}.answer{flex:1;max-height:50%;background:#f6f8fc;color:#15253b;border:0}.panelhead{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px;font-size:14px;font-weight:800}.panelhead small{font-size:11px;font-weight:500;opacity:.7}.panel textarea{width:100%;flex:1;min-height:0;overflow-y:auto;resize:none;background:transparent;border:0;outline:0;color:inherit;font-size:16px;line-height:1.5}.answertext{white-space:pre-wrap;overflow:auto;flex:1;line-height:1.6;font-size:17px;font-weight:600;overflow-wrap:anywhere}.bottom{flex:none;display:flex;gap:6px;align-items:center}.bottom button{flex:1;font-size:12px;padding:11px 5px}.bottom .settings{flex:0 0 42px}.drawer{position:fixed;inset:0;background:#07101de8;display:none;z-index:4;overflow:auto;padding:16px}.drawer.show{display:block}.drawer .sheet{max-width:680px;margin:auto;background:#162b44;border:1px solid #35526e;padding:16px;border-radius:16px}.drawer label{display:block;font-size:13px;margin:12px 0 5px}.drawer input,.drawer textarea{width:100%;background:#091a2d;color:white;border:1px solid #4a6786;border-radius:8px;padding:10px}.drawer textarea{height:115px}.drawer p{font-size:12px;color:#bfd0e2;line-height:1.5}.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1}.alert{color:#ffd18b;font-size:12px}.foot{font-size:10px;color:#a6bbd5;text-align:center;flex:none}@media(min-width:800px){.app{max-width:1100px;margin:auto}.question{flex:1}.answer{flex:1}}@media(max-height:650px){.top{height:36px}.controls button{min-height:34px}.panel{padding:8px}}
+.headtools{display:flex;align-items:center;gap:5px;min-width:0}.headtools small{max-width:125px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.expand{font-size:12px;padding:6px 8px;background:#315782;white-space:nowrap}.answer .expand{background:#dbe5f3;color:#19334e}.fullscreen{position:fixed;inset:0;z-index:20;background:#0b1729;padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 12px);display:flex;flex-direction:column;gap:10px}.fullscreen[hidden]{display:none}.fullhead{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:45px}.fullhead button{background:#a4384a}.fullscreen textarea,.fullscreen #fullAnswer{flex:1;min-height:0;width:100%;overflow-y:auto;border-radius:12px;padding:16px;background:#f6f8fc;color:#15253b;border:0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65}.fullscreen textarea{resize:none;background:#172a43;color:#fff;font-size:16px}.fullscreen #fullAnswer{font-size:17px;font-weight:600}.fullscreen textarea[hidden],.fullscreen #fullAnswer[hidden]{display:none}@media(max-height:650px){.headtools small{display:none}} 
+.topright{display:flex;align-items:center;gap:7px}.tabopen{padding:5px 10px;min-width:38px;font-size:19px;background:#203954}.question,.answer{flex:1 1 0;max-height:none}.foot{font-size:9px}.tabscreen{position:fixed;inset:0;z-index:10;background:#0b1729;padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 12px);display:flex;flex-direction:column;gap:10px}.tabscreen[hidden]{display:none}.tabtop{display:flex;justify-content:space-between;align-items:center}.tabtop button{background:#a4384a}.tabnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.tabnav button{font-size:12px;padding:10px 2px;background:#203954}.tabnav button.selected{background:#315f9e}.tabcontent{flex:1;min-height:0;overflow:auto;background:#162b44;border:1px solid #35526e;border-radius:14px;padding:13px}.tabcontent section[hidden]{display:none}.tabcontent label{display:block;margin:12px 0 5px;font-size:13px}.tabcontent input,.tabcontent textarea{width:100%;background:#091a2d;color:#fff;border:1px solid #4a6786;border-radius:8px;padding:10px}.tabcontent textarea{min-height:130px}.tabcontent p{font-size:12px;color:#bfd0e2;line-height:1.6}.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.row button{flex:1}.danger{background:#a4384a}.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.statcard{background:#203954;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}.statcard small{color:#afc6df;font-size:12px}.statcard strong{font-size:24px}.statsection{margin-top:16px}.statsection h3{font-size:14px;margin:0 0 12px}.barrow{display:grid;grid-template-columns:45px 1fr 32px;gap:8px;align-items:center;margin:9px 0;font-size:11px}.bartrack{height:12px;background:#0b1729;border-radius:8px;overflow:hidden}.barfill{height:100%;background:#4c9bd1}.keyword{display:inline-block;background:#264663;border-radius:15px;padding:7px 9px;font-size:12px;margin:3px}.historyitem{padding:12px 0;border-bottom:1px solid #35526e;font-size:13px;overflow-wrap:anywhere}.historyitem summary{cursor:pointer;line-height:1.6}.historyitem .detail{white-space:pre-wrap;background:#0b1729;padding:12px;border-radius:10px;margin-top:10px;line-height:1.6}.historyitem .deleteOne{margin-top:8px;background:#a4384a;font-size:12px;padding:7px 12px}.historyitem time{color:#b4cce5;font-size:11px}.statnote{margin-top:20px}.alert{color:#ffd18b!important}@media(max-width:799px){.question{flex:2 1 0}.answer{flex:3 1 0}#micDiagnostic{max-height:55px;overflow:auto}}</style></head><body><main class="app"><div class="top"><div><small>COUNCIL AI · AUTO</small><br><b>의회 AI 답변 보좌관</b></div><div class="topright"><span class="pill" id="status">연결 대기</span><button class="tabopen" id="openTabs" aria-label="관리 및 통계 탭 열기">☰</button></div></div><div class="controls"><button class="start" id="start">🎙 질의시작</button><button class="stop" id="stop">■ 질의종료</button><button class="follow" id="follow">💬 보충질의</button></div><section class="panel question"><div class="panelhead"><span>질의요지 / 인식 원문</span><div class="headtools"><small id="micState">마이크 대기</small><button class="expand" data-target="question" aria-label="질의요지 전체화면">⛶ 확대</button></div></div><div id="micDiagnostic" hidden role="status" style="font-size:12px;line-height:1.5;padding:8px;border:1px solid #bc9552;border-radius:8px;background:#44351c;color:#fff2cf;margin-bottom:6px"></div><textarea id="question" placeholder="질의시작을 누르세요. 음성인식이 안 되면 이곳에 직접 입력할 수 있습니다."></textarea></section><section class="panel answer"><div class="panelhead"><span>AI 답변자료</span><div class="headtools"><small id="sourceStatus">공식자료 우선 · 불확실성 표시</small><button class="expand" data-target="answer" aria-label="답변자료 전체화면">⛶ 확대</button></div></div><div class="answertext" id="answer" aria-live="polite">의원 질의가 끝나면 자동으로 답변을 작성합니다.
+
+① 질의요지
+② 답변요점
+③ 확인 필요사항</div></section><div class="foot">공개 시험판 · 가상답변 전용 · 기기 내 음성인식만 허용</div></main><div class="tabscreen" id="tabscreen" hidden role="dialog" aria-modal="true" aria-label="관리 및 통계"><div class="tabtop"><strong>관리 · 통계</strong><button id="tabClose">✕ 메인</button></div><nav class="tabnav" aria-label="관리 탭"><button data-tab="stats" class="selected">통계</button><button data-tab="history">질의응답 이력</button><button data-tab="tools">답변 도구</button><button data-tab="config">설정</button></nav><div class="tabcontent"><section id="tab-stats"><div class="statgrid" id="statCards"></div><div class="statsection"><h3>최근 7일 질의 건수</h3><div id="weeklyBars"></div></div><div class="statsection"><h3>자주 등장한 질의 키워드</h3><div id="keywords"></div></div><p class="statnote">통계는 이 기기에 저장된 답변 완료 기록만 집계합니다. 답변 정확도나 실제 회의 성과를 의미하지 않습니다.</p></section><section id="tab-history" hidden><div class="row"><input id="historySearch" aria-label="질의응답 검색" placeholder="질문·답변 검색" style="flex:1;min-width:140px"><button id="export">JSON 백업</button></div><p id="historyCount" aria-live="polite"></p><div id="records"></div></section><section id="tab-tools" hidden><div class="row"><button id="generate">⚡ 지금 답변</button><button id="copy">답변 복사</button></div><p>질의종료 시 자동 생성됩니다. 수동 재생성이나 답변 복사는 여기에서 실행합니다.</p></section><section id="tab-config" hidden><label style="display:flex;align-items:center;gap:8px"><input id="demoMode" type="checkbox" style="width:auto" checked> 가상답변 전용 모드 (답변 서버 전송 없음)</label><p>가상답변은 기능 테스트용이며 실제 업무 판단에 사용할 수 없습니다.</p><label>AI 서버 주소 (공개 시험판 사용 불가)</label><input id="endpoint" placeholder="https://기관승인서버.example/api/answer"><label>접속 토큰 (사용 불가)</label><input id="token" type="password" placeholder="서버 접근용 토큰"><label>업무용 참고자료 (입력 금지)</label><textarea id="knowledge" placeholder="승인된 자료만 입력하세요"></textarea><p>GPT 프로젝트의 파일과 다른 대화방을 자동 조회할 수 없습니다. 자료를 별도로 등록하거나 승인된 서버에 연계해야 합니다.</p><div class="row"><button id="save">설정 저장</button><button id="clearAll" class="danger">기록 삭제</button></div><p class="alert">기기 내 음성인식만 허용합니다. 미지원 시 직접 입력하세요.</p></section></div></div><div class="fullscreen" id="fullscreen" hidden role="dialog" aria-modal="true" aria-labelledby="fullTitle"><div class="fullhead"><strong id="fullTitle">전체화면</strong><button id="fullClose">✕ 닫기</button></div><textarea id="fullQuestion" hidden aria-label="질의요지 전체화면 편집"></textarea><div id="fullAnswer" hidden></div></div><script>
+(()=>{'use strict';const $=id=>document.getElementById(id);const key='council_v6_';const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(key+k))??d}catch{return d}};let records=read('records',[]),config={endpoint:'',token:'',knowledge:'',demoMode:true},recognition=null,listening=false,base='',followMode=false,activeController=null;const setStatus=s=>{const el=$('status');el.textContent=s;el.classList.toggle('listening',s==='듣는중');};const saveRecords=()=>{try{localStorage.setItem(key+'records',JSON.stringify(records.slice(-500)))}catch(e){setStatus('저장 공간 부족')}};function showAnswer(t){$('answer').textContent=t;if(fullTarget==='answer')$('fullAnswer').textContent=t}function clean(s){return String(s||'').trim()};function stopSpeech(){if(recognition){try{recognition.stop()}catch{} }listening=false;$('micState').textContent='마이크 종료'}function micNotice(message){setStatus('음성 진단');$('micState').textContent='마이크 확인 필요';const box=$('micDiagnostic');box.textContent=message;box.hidden=false}
+function begin(isFollow){
+  stopSpeech();followMode=isFollow;
+  base=isFollow?clean($('question').value)+'\n[보충질의] ':'';
+  const box=$('micDiagnostic');box.hidden=false;
+  box.textContent='음성인식 지원 여부를 확인하고 있습니다…';
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){micNotice('이 실행 환경은 브라우저 음성인식을 지원하지 않습니다. Acode 미리보기 또는 로컬 HTML에서 실행 중이라면 Chrome의 HTTPS 페이지나 Android 앱 방식이 필요할 수 있습니다. 현재는 질문창에 직접 입력하여 테스트할 수 있습니다.');return}
+  if(!window.isSecureContext){micNotice('현재 페이지는 보안 컨텍스트(HTTPS 또는 지원되는 로컬 환경)가 아닙니다. 브라우저 음성인식이 제한될 수 있습니다.');return}
+  try{
+    recognition=new SR();
+    if (!('processLocally' in recognition)) {
+      micNotice('이 브라우저는 기기 내 음성인식을 지원하지 않습니다. 질문을 직접 입력해 주세요.');
+      return;
+    }
+    recognition.processLocally = true;
+    if (recognition.processLocally !== true) {
+      micNotice('기기 내 음성인식을 설정할 수 없습니다. 질문을 직접 입력해 주세요.');
+      return;
+    }
+    recognition.lang='ko-KR';recognition.continuous=true;recognition.interimResults=true;
+    recognition.onresult=e=>{
+      let final='',interim='';
+      for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)final+=t+' ';else interim+=t}
+      $('question').value=base+final+interim;$('micState').textContent='인식 중…';
+      box.textContent='음성이 인식되고 있습니다.';};
+    recognition.onerror=e=>{listening=false;micNotice('음성인식 오류: '+e.error+(e.error==='not-allowed'?' · 사이트 마이크 권한과 HTTPS 실행 주소를 확인하세요.':' · 기기 내 한국어 음성인식 지원 여부를 확인하거나 질문을 직접 입력하세요.')+' 실제 업무 발언은 사용하지 마세요.')};
+    recognition.onend=()=>{listening=false;$('micState').textContent='마이크 종료';if($('status').textContent==='듣는중'){setStatus('음성 종료');box.textContent='음성인식이 종료되었습니다. 글자가 표시되지 않았다면 브라우저의 음성인식 지원 여부를 확인하세요.'}};
+    recognition.start();listening=true;setStatus('듣는중');$('micState').textContent='마이크 사용 중';box.textContent='기기 내 한국어 음성인식을 요청했습니다.';
+  }catch(e){micNotice('마이크 시작 실패: '+(e.message||e.name||'알 수 없는 오류'))}
+}
+async function generate(){stopSpeech();const question=clean($('question').value);if(!question){setStatus('질의 입력 필요');return}if(config.demoMode!==false){$('generate').disabled=true;setStatus('가상답변 생성 중');const started=performance.now();const demo='[오프라인 가상 테스트 · 실제 행정자료 아님]\n\n① 질의요지\n'+question+'\n\n② 답변요점\n본 답변은 화면·이력·통계 기능 확인용 가상 응답입니다. 실제 추진현황이나 수치를 확인하지 않았습니다.\n\n③ 확인 필요사항\n공식 업무자료, 법령, 예산 및 사업 추진현황을 별도로 확인해야 합니다.\n\n[근거] 가상 시연 · GPT 호출 및 외부 전송 없음';showAnswer(demo);records.push({date:new Date().toISOString(),question,answer:demo,followup:followMode,elapsedMs:Math.round(performance.now()-started),mode:'demo'});saveRecords();$('sourceStatus').textContent='오프라인 가상응답 · 실제 근거 없음';setStatus('가상답변 완료');$('generate').disabled=false;return}setStatus("공개 시험판은 가상답변만 지원합니다");return}
+function openTab(name){$('tabscreen').hidden=false;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('selected',b.dataset.tab===name));for(const n of ['stats','history','tools','config'])$('tab-'+n).hidden=n!==name;if(name==='stats')renderStats();if(name==='history')renderHistory()}function renderHistory(){const search=clean($('historySearch').value).toLocaleLowerCase('ko-KR');const list=records.map((r,i)=>({...r,_index:i})).filter(r=>((r.question||'')+' '+(r.answer||'')).toLocaleLowerCase('ko-KR').includes(search)).reverse();$('historyCount').textContent='검색 결과 '+list.length+'건 / 전체 '+records.length+'건';$('records').replaceChildren();list.forEach(r=>{const wrap=document.createElement('details');wrap.className='historyitem';const summary=document.createElement('summary');const time=document.createElement('time');const date=new Date(r.date);time.textContent=Number.isNaN(date.getTime())?'날짜 미확인':date.toLocaleString('ko-KR');const q=document.createElement('div');q.textContent='Q. '+(r.question||'질의 없음').slice(0,160);summary.append(time,q);const detail=document.createElement('div');detail.className='detail';detail.textContent='질의내용\n'+(r.question||'')+'\n\n답변자료\n'+(r.answer||'');const del=document.createElement('button');del.className='deleteOne';del.textContent='이 기록 삭제';del.addEventListener('click',()=>{if(!confirm('선택한 질의응답 기록을 삭제합니까?'))return;records.splice(r._index,1);saveRecords();renderHistory()});wrap.append(summary,detail,del);$('records').append(wrap)});if(!list.length){const empty=document.createElement('p');empty.textContent=records.length?'검색 결과가 없습니다.':'저장된 질의응답이 없습니다. 답변 생성이 완료되면 자동 저장됩니다.';$('records').append(empty)}}function renderStats(){const now=new Date(),start=new Date(now.getFullYear(),now.getMonth(),now.getDate());const week=new Date(start);week.setDate(start.getDate()-6);const recent=records.filter(r=>new Date(r.date)>=week);const days=new Set(records.map(r=>new Date(r.date).toLocaleDateString('sv-SE')));const questions=records.map(r=>r.question||'');const followCount=records.filter(r=>r.followup||String(r.question||'').includes('[보충질의]')).length;const cards=[['누적 답변',records.length+'건'],['최근 7일',recent.length+'건'],['기록된 날짜',days.size+'일'],['보충질의 포함',followCount+'건']];$('statCards').replaceChildren();cards.forEach(([k,v])=>{const d=document.createElement('div');d.className='statcard';const a=document.createElement('small');a.textContent=k;const b=document.createElement('strong');b.textContent=v;d.append(a,b);$('statCards').append(d)});const counts=Array.from({length:7},(_,i)=>{const d=new Date(week);d.setDate(week.getDate()+i);const date=d.toLocaleDateString('sv-SE');return {label:(d.getMonth()+1)+'/'+d.getDate(),count:recent.filter(r=>new Date(r.date).toLocaleDateString('sv-SE')===date).length}});const max=Math.max(1,...counts.map(x=>x.count));$('weeklyBars').replaceChildren();counts.forEach(x=>{const row=document.createElement('div');row.className='barrow';const l=document.createElement('span');l.textContent=x.label;const track=document.createElement('div');track.className='bartrack';const fill=document.createElement('div');fill.className='barfill';fill.style.width=(x.count/max*100)+'%';track.append(fill);const v=document.createElement('span');v.textContent=x.count+'건';row.append(l,track,v);$('weeklyBars').append(row)});const stop=new Set(['그리고','그래서','대한','관련','어떻게','있습니까','무엇인가','있나요','추진','사업','현황','계획','질의','보충질의','있는','대해서','하는','해당','어떤','합니다','것은','이번']);const freq={};questions.forEach(q=>(q.match(/[가-힣A-Za-z0-9]{2,}/g)||[]).forEach(w=>{if(!stop.has(w)&&!/^\d+$/.test(w))freq[w]=(freq[w]||0)+1}));const top=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,8);$('keywords').replaceChildren();if(!top.length)$('keywords').textContent='집계할 키워드가 없습니다.';top.forEach(([w,n])=>{const t=document.createElement('span');t.className='keyword';t.textContent=w+' · '+n;$('keywords').append(t)})}let fullTarget=null;function closeFull(){if(fullTarget==='question')$('question').value=$('fullQuestion').value;$('fullscreen').hidden=true;fullTarget=null}document.querySelectorAll('.expand').forEach(b=>b.addEventListener('click',()=>{fullTarget=b.dataset.target;$('fullTitle').textContent=fullTarget==='question'?'질의요지 · 전체화면':'답변자료 · 전체화면';$('fullQuestion').hidden=fullTarget!=='question';$('fullAnswer').hidden=fullTarget!=='answer';if(fullTarget==='question'){$('fullQuestion').value=$('question').value;$('fullQuestion').focus()}else $('fullAnswer').textContent=$('answer').textContent;$('fullscreen').hidden=false}));$('fullClose').onclick=closeFull;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('fullscreen').hidden)closeFull()});$('start').onclick=()=>begin(false);$('follow').onclick=()=>begin(true);$('stop').onclick=()=>{stopSpeech();setStatus('중지');generate()};$('generate').onclick=generate;$('historySearch').addEventListener('input',renderHistory);$('copy').onclick=async()=>{try{await navigator.clipboard.writeText($('answer').textContent);setStatus('답변 복사됨')}catch{setStatus('복사 권한 없음')}};$('openTabs').onclick=()=>openTab('stats');$('tabClose').onclick=()=>$('tabscreen').hidden=true;document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));$('demoMode').checked=true;$('demoMode').disabled=true;$('endpoint').disabled=true;$('token').disabled=true;$('knowledge').disabled=true;$('save').onclick=()=>{setStatus('공개 시험판은 서버 설정을 지원하지 않습니다');$('tabscreen').hidden=true};$('clearAll').onclick=()=>{if(confirm('저장된 모든 질의응답을 삭제합니까?')){records=[];saveRecords();setStatus('기록 삭제됨')}};$('export').onclick=()=>{const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='의회질의응답_'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};})();
+</script><style>
+.v106-status{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:8px 10px;border:1px solid #315782;border-radius:10px;background:#142a43;font-size:12px}
+.v106-status button{padding:6px 9px;font-size:12px;background:#315f9e}
+.v106-status span{flex:1;min-width:130px;color:#c5dcf4}
+</style>
+<script>
+(function(){
+'use strict';
+const url='https://council-ai-v106-api.sos900501.workers.dev/health';
+function ready(){
+const main=document.querySelector('main.app');
+const controls=main&&main.querySelector('.controls');
+if(!controls)return;
+const bar=document.createElement('div');bar.className='v106-status';
+const label=document.createElement('span');label.textContent='V10.6 서버: 미확인 · GPT 연결 안 함';
+label.setAttribute('role','status');
+const btn=document.createElement('button');btn.type='button';btn.textContent='서버 상태 확인';
+btn.onclick=async()=>{
+ btn.disabled=true;label.textContent='V10.6 서버 상태 확인 중…';
+ try{
+  const response=await fetch(url,{method:'GET',cache:'no-store',signal:AbortSignal.timeout(10000)});
+  const data=await response.json();
+  if(response.ok&&data.ok===true&&data.version==='10.6'&&data.mode==='locked'){
+   label.textContent='✓ V10.6 서버 정상 · GPT 잠금 유지';
+  }else{
+   label.textContent='⚠ 서버 응답 확인 필요 · GPT 답변 미연결';
+  }
+ }catch(e){label.textContent='⚠ 연결 실패 · 인터넷 또는 서버 상태 확인'}
+ finally{btn.disabled=false}
+};
+bar.append(label,btn);controls.insertAdjacentElement('afterend',bar);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+})();
+</script><style>
+.v107-panel{background:#172a43;border:1px solid #486484;border-radius:11px;padding:10px;display:flex;flex-direction:column;gap:8px;font-size:12px}
+.v107-panel p{margin:0;line-height:1.5;color:#d3e4f6}
+.v107-panel label{display:flex;align-items:center;gap:8px}
+.v107-panel input{width:18px;height:18px;flex:none}
+.v107-panel button{font-size:12px;padding:8px;background:#315f9e}
+.v107-panel button:disabled{opacity:.45}
+</style>
+<script>
+(function(){
+'use strict';
+function ready(){
+const controls=document.querySelector('main.app .controls');if(!controls)return;
+const panel=document.createElement('section');panel.className='v107-panel';
+const heading=document.createElement('strong');heading.textContent='V10.7 · GPT 연계 준비 (전송 차단)';
+const note=document.createElement('p');note.textContent='가상 질문만 검토할 수 있습니다. 실제 업무자료·회의 음성은 사용하지 마세요. GPT 요청 기능은 서버 보안 설정 및 별도 승인 전까지 비활성화됩니다.';
+const label=document.createElement('label');
+const check=document.createElement('input');check.type='checkbox';check.setAttribute('aria-label','가상 질문 전용 확인');
+const labelText=document.createElement('span');labelText.textContent='현재 질문은 공개 가능한 가상 시험 질문이며 실제 업무정보가 아닙니다';
+label.append(check,labelText);
+const preview=document.createElement('button');preview.type='button';preview.textContent='GPT 전송 전 질문 검토';preview.disabled=true;
+const result=document.createElement('p');result.setAttribute('role','status');result.textContent='현재 상태: GPT 호출 차단 · 기존 가상답변 유지';
+check.onchange=()=>{preview.disabled=!check.checked;result.textContent='현재 상태: GPT 호출 차단 · 기존 가상답변 유지'};
+preview.onclick=()=>{
+const q=document.getElementById('question').value.trim();
+if(!q){result.textContent='질문이 없습니다. 가상 질문을 먼저 입력하세요.';return}
+result.textContent='전송하지 않은 질문 ('+q.length+'자): '+q.slice(0,180)+(q.length>180?'…':'')+' · 서버 전송 없음';
+};
+panel.append(heading,note,label,preview,result);
+const bar=document.querySelector('.v106-status');(bar||controls).insertAdjacentElement('afterend',panel);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+})();
+</script><style>
+.v108-preflight{background:#12243a;border:1px solid #52718e;border-radius:11px;padding:11px;margin-top:9px;font-size:12px;line-height:1.65}
+.v108-preflight h3{font-size:14px;margin:0 0 5px;color:#f0f6ff}
+.v108-preflight p{margin:5px 0;color:#d3e4f6}
+.v108-preflight button{padding:9px 12px;background:#315f9e;font-size:12px}
+.v108-preflight .v108-result{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
+<script>
+(function(){
+'use strict';
+function init(){
+const existing=document.querySelector('.v107-panel');if(!existing)return;
+const panel=document.createElement('section');panel.className='v108-preflight';
+const heading=document.createElement('h3');heading.textContent='V10.8 · 가상 질문 보안 사전점검';
+const note=document.createElement('p');note.textContent='실제 API 호출 없음 · 질문은 기기 안에서만 점검 · 음성 및 업무자료 전송 금지';
+const btn=document.createElement('button');btn.type='button';btn.textContent='가상 질문 안전 점검';
+const output=document.createElement('p');output.className='v108-result';output.setAttribute('role','status');output.textContent='GPT 호출 차단 유지';
+btn.addEventListener('click',()=>{
+const q=(document.getElementById('question')?.value||'').trim();
+const checked=existing.querySelector('input[type="checkbox"]')?.checked===true;
+if(!checked){output.textContent='점검 중단: 먼저 가상 질문 확인란을 선택하세요.';return}
+if(!q){output.textContent='점검 중단: 가상 시험 질문이 없습니다.';return}
+if(q.length>500){output.textContent='점검 중단: 500자 이하의 가상 질문만 허용합니다. 현재 '+q.length+'자';return}
+const sensitive=/(주민등록번호|계좌번호|비밀번호|API[_ -]?KEY|Bearer\s+|실제\s*회의록|비공개|대외비|민원인|개인정보)/i.test(q);
+if(sensitive){output.textContent='점검 중단: 민감정보 관련 표현이 감지되었습니다. 실제 업무정보를 제거한 가상 질문만 사용하세요. (자동 탐지는 완전하지 않습니다.)';return}
+output.textContent='사전점검 통과 ('+q.length+'자)\n질문 미리보기: '+q.slice(0,180)+(q.length>180?'…':'')+'\n외부 전송: 없음\nGPT 호출: 잠금\n다음 단계: 서버 인증 및 별도 실제 호출 승인 필요\n※ 자동 검사는 개인정보 유무를 보증하지 않습니다.';
+});
+panel.append(heading,note,btn,output);existing.insertAdjacentElement('afterend',panel);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script><style>
+.v109-server{background:#10253c;border:1px solid #4b7195;border-radius:11px;padding:11px;margin-top:9px;font-size:12px;line-height:1.6}
+.v109-server h3{font-size:14px;margin:0 0 6px}
+.v109-server button{padding:9px 12px;background:#315f9e;font-size:12px}
+.v109-server p{white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0}
+</style>
+<script>
+(function(){
+'use strict';
+function ready(){
+const parent=document.querySelector('.v108-preflight');if(!parent)return;
+const section=document.createElement('section');section.className='v109-server';
+const h=document.createElement('h3');h.textContent='V10.9 · 서버 연결 및 인증 준비 진단';
+const info=document.createElement('p');info.textContent='서버 상태만 확인합니다. 질문·음성·업무자료·API 키는 전송하지 않습니다. 인증값 등록 여부는 이 공개 화면에서 확인할 수 없습니다.';
+const btn=document.createElement('button');btn.type='button';btn.textContent='서버 보안 상태 확인';
+const result=document.createElement('p');result.setAttribute('role','status');result.textContent='아직 확인하지 않음 · GPT 호출 차단';
+btn.addEventListener('click',async()=>{
+btn.disabled=true;result.textContent='서버 상태 조회 중…';
+try{
+const response=await fetch('https://council-ai-v106-api.sos900501.workers.dev/health',{method:'GET',cache:'no-store',signal:AbortSignal.timeout(10000)});
+if(!response.ok)throw new Error('HTTP '+response.status);
+const data=await response.json();
+if(data.ok===true&&data.mode==='locked')result.textContent='✓ 서버 연결 성공\n✓ GPT 잠금 유지\n✓ 질문·음성 전송 없음\n다음 준비: Cloudflare Secret 등록 및 별도 호출 승인';
+else if(data.ok===true&&data.mode==='configured-enabled')result.textContent='⚠ 서버 설정상 GPT 허용 상태입니다. 인증 및 외부 전송 허용 여부는 확인되지 않았습니다. 시험 호출을 진행하지 마세요.';
+else result.textContent='⚠ 서버 응답을 확인해야 합니다. GPT 요청은 실행하지 않았습니다.';
+}catch(e){result.textContent='⚠ 서버 상태 조회 실패: '+String(e.message||e).slice(0,120)+'\n질문·음성 전송 없음';}
+finally{btn.disabled=false;}
+});
+section.append(h,info,btn,result);parent.insertAdjacentElement('afterend',section);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+})();
+</script><style>
+.v110-ready{margin-top:10px;padding:12px;background:#122b42;border:1px solid #547da0;border-radius:12px;font-size:12px;line-height:1.6}
+.v110-ready h3{font-size:15px;margin:0 0 6px}
+.v110-ready p{margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.v110-ready button{padding:9px 12px;background:#315f9e;font-size:12px;margin-top:5px}
+.v110-ready .v110-flag{color:#f8d88b}
+</style>
+<script>
+(function(){
+'use strict';
+function init(){
+const parent=document.querySelector('.v109-server');if(!parent)return;
+const section=document.createElement('section');section.className='v110-ready';
+const h=document.createElement('h3');h.textContent='V11.0 · GPT 시험 준비 콘솔';
+const notice=document.createElement('p');notice.className='v110-flag';notice.textContent='🔒 현재 GPT API 호출 불가 · 공개 HTML에 비밀키/인증 토큰 입력 금지';
+const description=document.createElement('p');description.textContent='실제 질문 대신 고정된 가상 질문으로만 시험 준비합니다. 버튼은 기기 내부에서 점검하며 OpenAI나 Cloudflare로 질문을 전송하지 않습니다.';
+const demo=document.createElement('p');const fixed='가상의 A시가 도시공원 조성을 계획할 때 일반적으로 검토할 사항을 알려주세요. 실제 사업정보는 포함하지 마세요.';demo.textContent='시험 질문: '+fixed;
+const btn=document.createElement('button');btn.type='button';btn.textContent='고정 가상 질문 준비';
+const status=document.createElement('p');status.setAttribute('role','status');status.textContent='대기 중 · GPT 잠금 유지';
+btn.onclick=()=>{
+const q=document.getElementById('question');if(!q){status.textContent='질문 입력창을 찾지 못했습니다.';return}
+q.value=fixed;
+const check=document.querySelector('.v107-panel input[type="checkbox"]');if(check){check.checked=true;check.dispatchEvent(new Event('change'))}
+status.textContent='✓ 가상 질문 입력 완료\n✓ 실제 업무자료 사용 안 함\n✓ 외부 전송 없음\n✓ API 호출 없음\n다음 작업: Cloudflare Secret 등록 상태 확인, 공개 페이지와 분리된 인증 체계 구축, 실제 호출에 대한 별도 승인';
+};
+section.append(h,notice,description,demo,btn,status);parent.insertAdjacentElement('afterend',section);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script><style>
+/* V11.1 mobile layout: diagnostic cards live in their own scrollable overlay */
+.v111-open{font-size:12px!important;padding:8px 10px!important;min-width:66px;background:#315f9e!important}
+.v111-overlay{position:fixed;inset:0;z-index:30;background:#0b1729;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 12px);gap:10px}
+.v111-overlay[hidden]{display:none}
+.v111-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex:none}
+.v111-head strong{font-size:17px}
+.v111-head button{background:#a4384a}
+.v111-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:10px;padding-bottom:16px}
+.v111-scroll > *{flex-shrink:0;margin:0!important}
+.v111-scroll .v106-status span{min-width:0}
+.v111-scroll .v107-panel label{align-items:flex-start}
+.v111-scroll .v107-panel label input{margin-top:3px}
+.v111-scroll .v107-panel button{min-height:44px}
+.v111-scroll .v110-ready button{min-height:44px}
+@media(max-width:390px){.top b{font-size:15px}.v111-open{font-size:11px!important;padding:7px!important}.topright{gap:4px}}
+</style>
+<script>
+(function(){
+'use strict';
+function init(){
+const top=document.querySelector('.topright');const app=document.querySelector('main.app');if(!top||!app)return;
+const open=document.createElement('button');open.type='button';open.className='v111-open';open.textContent='GPT 점검';open.setAttribute('aria-label','GPT 보안 점검 화면 열기');
+const overlay=document.createElement('section');overlay.className='v111-overlay';overlay.hidden=true;overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','GPT 연결 및 보안 점검');
+const head=document.createElement('div');head.className='v111-head';const title=document.createElement('strong');title.textContent='GPT 연결 · 보안 점검';const close=document.createElement('button');close.type='button';close.textContent='닫기';head.append(title,close);
+const scroll=document.createElement('div');scroll.className='v111-scroll';
+for(const selector of ['.v106-status','.v107-panel','.v108-preflight','.v109-server','.v110-ready']){
+const node=app.querySelector(selector);if(node)scroll.appendChild(node);
+}
+overlay.append(head,scroll);document.body.appendChild(overlay);
+const shut=()=>{overlay.hidden=true;open.focus()};
+open.onclick=()=>{overlay.hidden=false;close.focus()};
+close.onclick=shut;
+overlay.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();shut()}});
+top.insertBefore(open,document.getElementById('openTabs'));
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script><script>
+(function(){
+function init(){
+const top=document.querySelector('.topright');if(!top)return;
+const b=document.createElement('button');b.type='button';b.textContent='프로젝트';b.className='v111-open';
+const d=document.createElement('section');d.className='v111-overlay';d.hidden=true;d.setAttribute('role','dialog');
+const h=document.createElement('strong');h.textContent='V14 · 프로젝트 병행 운영';
+const p=document.createElement('p');p.textContent='업무자료는 ChatGPT 프로젝트에서만 관리합니다. 이 화면은 프로젝트 열기 전용이며 자동 질문 전송 및 답변 수신은 지원하지 않습니다.';
+const label=document.createElement('label');label.textContent='비공개 프로젝트 주소';
+const input=document.createElement('input');input.type='url';input.placeholder='https://chatgpt.com/g/g-p-...';input.style.cssText='width:100%;padding:12px;color:#15253b';label.appendChild(input);
+const status=document.createElement('p');status.setAttribute('role','status');
+try{input.value=localStorage.getItem('council_v14_project_url')||''}catch{}
+function valid(){try{const u=new URL(input.value.trim());return u.origin==='https://chatgpt.com'&&/^\/g\/g-p-[A-Za-z0-9_-]+(?:\/project)?\/?$/.test(u.pathname)&&!u.search&&!u.hash?u.href:null}catch{return null}}
+const save=document.createElement('button');save.textContent='주소 저장';save.onclick=()=>{const u=valid();if(!u){status.textContent='ChatGPT 프로젝트 주소를 확인하세요.';return}try{localStorage.setItem('council_v14_project_url',u);status.textContent='이 브라우저에 주소 저장 완료'}catch{status.textContent='저장 실패'}};
+const open=document.createElement('button');open.textContent='지정 프로젝트 열기';open.onclick=()=>{const u=valid();if(!u){status.textContent='프로젝트 주소를 먼저 입력하세요.';return}window.open(u,'_blank','noopener,noreferrer')};
+const close=document.createElement('button');close.textContent='보좌관으로 돌아가기';close.onclick=()=>{d.hidden=true;b.focus()};
+d.append(h,p,label,save,open,status,close);document.body.appendChild(d);b.onclick=()=>{d.hidden=false;input.focus()};top.prepend(b);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script></body></html>
